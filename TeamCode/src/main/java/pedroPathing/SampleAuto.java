@@ -114,7 +114,13 @@ public class SampleAuto extends OpMode {
                     .build();
 
 
-        //ADD SCORE COMMAND (Lift, Arm, Drop)
+        //ADD SCORE COMMAND (Lift Slides, Flip Arm, Drop Lever, Flip Arm, Retract Slides)
+
+        grabSampleOne = follower.pathBuilder()
+                .addPath(new BezierLine(new Point(scorePose), new Point(pickup2Pose)))
+                .setLinearHeadingInterpolation(scorePose.getHeading(), pickup2Pose.getHeading())
+                .build();
+
 
 
 
