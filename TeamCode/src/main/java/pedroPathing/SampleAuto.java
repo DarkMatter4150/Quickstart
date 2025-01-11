@@ -5,6 +5,7 @@ import com.pedropathing.localization.Pose;
 import com.pedropathing.pathgen.BezierCurve;
 import com.pedropathing.pathgen.BezierLine;
 import com.pedropathing.pathgen.Path;
+import com.pedropathing.pathgen.PathBuilder;
 import com.pedropathing.pathgen.PathChain;
 import com.pedropathing.pathgen.Point;
 import com.pedropathing.util.Constants;
@@ -68,8 +69,8 @@ public class SampleAuto extends OpMode {
     private final Pose parkControlPose = new Pose(60, 98, Math.toRadians(90));
 
     /* These are our Paths and PathChains that we will define in buildPaths() */
-    private Path scorePreload, park;
-    private PathChain grabPickup1, grabPickup2, grabPickup3, scorePickup1, scorePickup2, scorePickup3;
+    private Path blueAscentPark, blueAscentAuto;
+    private PathChain grabSampleOne, grabSampleTwo, grabSampleThree, scoreSampleOne, scoreSampleTwo, scoreSampleThree;
 
     /** Build the paths for the auto (adds, for example, constant/linear headings while doing paths)
      * It is necessary to do this so that all the paths are built before the auto starts. **/
@@ -90,52 +91,82 @@ public class SampleAuto extends OpMode {
          * PathChains hold Path(s) within it and are able to hold their end point, meaning that they will holdPoint until another path is followed.
          * Here is a explanation of the difference between Paths and PathChains <https://pedropathing.com/commonissues/pathtopathchain.html> */
 
-        /* This is our scorePreload path. We are using a BezierLine, which is a straight line. */
-        scorePreload = new Path(new BezierLine(new Point(startPose), new Point(scorePose)));
-        scorePreload.setLinearHeadingInterpolation(startPose.getHeading(), scorePose.getHeading());
 
-        /* Here is an example for Constant Interpolation
-        scorePreload.setConstantInterpolation(startPose.getHeading()); */
+//        scorePreload = new Path(new BezierLine(new Point(startPose), new Point(scorePose));
+//
+//        /* This is our scorePreload path. We are using a BezierLine, which is a straight line. */
+////        scorePreload = new Path(new BezierLine(new Point(startPose), new Point(scorePose)));
+////        scorePreload.setLinearHeadingInterpolation(startPose.getHeading(), scorePose.getHeading());
+            blueAscentAuto = new Path (new BezierLine(new Point(startPose), new Point (scorePose)));
+            blueAscentAuto.setLinearHeadingInterpolation(startPose.getHeading(), scorePose.getHeading());
+            //ADD SCORE COMMAND (Lift, Arm, Drop)
 
-        /* This is our grabPickup1 PathChain. We are using a single path with a BezierLine, which is a straight line. */
-        grabPickup1 = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(scorePose), new Point(pickup1Pose)))
-                .setLinearHeadingInterpolation(scorePose.getHeading(), pickup1Pose.getHeading())
-                .build();
+            grabSampleOne = follower.pathBuilder()
+                    .addPath(new BezierLine(new Point(scorePose), new Point(pickup1Pose)))
+                    .setLinearHeadingInterpolation(scorePose.getHeading(), pickup1Pose.getHeading())
+                                    .build();
 
-        /* This is our scorePickup1 PathChain. We are using a single path with a BezierLine, which is a straight line. */
-        scorePickup1 = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(pickup1Pose), new Point(scorePose)))
-                .setLinearHeadingInterpolation(pickup1Pose.getHeading(), scorePose.getHeading())
-                .build();
+        //ADD INTAKE COMMAND (Extend Sildes, drop Intake, Intake, Lift Intake, Retract Slides
 
-        /* This is our grabPickup2 PathChain. We are using a single path with a BezierLine, which is a straight line. */
-        grabPickup2 = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(scorePose), new Point(pickup2Pose)))
-                .setLinearHeadingInterpolation(scorePose.getHeading(), pickup2Pose.getHeading())
-                .build();
+            scoreSampleOne = follower.pathBuilder()
+                    .addPath(new BezierLine(new Point(pickup1Pose), new Point(scorePose)))
+                    .setLinearHeadingInterpolation(pickup1Pose.getHeading(), scorePose.getHeading())
+                    .build();
 
-        /* This is our scorePickup2 PathChain. We are using a single path with a BezierLine, which is a straight line. */
-        scorePickup2 = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(pickup2Pose), new Point(scorePose)))
-                .setLinearHeadingInterpolation(pickup2Pose.getHeading(), scorePose.getHeading())
-                .build();
 
-        /* This is our grabPickup3 PathChain. We are using a single path with a BezierLine, which is a straight line. */
-        grabPickup3 = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(scorePose), new Point(pickup3Pose)))
-                .setLinearHeadingInterpolation(scorePose.getHeading(), pickup3Pose.getHeading())
-                .build();
+        //ADD SCORE COMMAND (Lift, Arm, Drop)
 
-        /* This is our scorePickup3 PathChain. We are using a single path with a BezierLine, which is a straight line. */
-        scorePickup3 = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(pickup3Pose), new Point(scorePose)))
-                .setLinearHeadingInterpolation(pickup3Pose.getHeading(), scorePose.getHeading())
-                .build();
 
-        /* This is our park path. We are using a BezierCurve with 3 points, which is a curved line that is curved based off of the control point */
-        park = new Path(new BezierCurve(new Point(scorePose), /* Control Point */ new Point(parkControlPose), new Point(parkPose)));
-        park.setLinearHeadingInterpolation(scorePose.getHeading(), parkPose.getHeading());
+
+
+
+
+
+
+
+//
+//        /* Here is an example for Constant Interpolation
+//        scorePreload.setConstantInterpolation(startPose.getHeading()); */
+//
+//        /* This is our grabPickup1 PathChain. We are using a single path with a BezierLine, which is a straight line. */
+//        grabPickup1 = follower.pathBuilder()
+//                .addPath(new BezierLine(new Point(scorePose), new Point(pickup1Pose)))
+//                .setLinearHeadingInterpolation(scorePose.getHeading(), pickup1Pose.getHeading())
+//                .build();
+//
+//        /* This is our scorePickup1 PathChain. We are using a single path with a BezierLine, which is a straight line. */
+//        scorePickup1 = follower.pathBuilder()
+//                .addPath(new BezierLine(new Point(pickup1Pose), new Point(scorePose)))
+//                .setLinearHeadingInterpolation(pickup1Pose.getHeading(), scorePose.getHeading())
+//                .build();
+//
+//        /* This is our grabPickup2 PathChain. We are using a single path with a BezierLine, which is a straight line. */
+//        grabPickup2 = follower.pathBuilder()
+//                .addPath(new BezierLine(new Point(scorePose), new Point(pickup2Pose)))
+//                .setLinearHeadingInterpolation(scorePose.getHeading(), pickup2Pose.getHeading())
+//                .build();
+//
+//        /* This is our scorePickup2 PathChain. We are using a single path with a BezierLine, which is a straight line. */
+//        scorePickup2 = follower.pathBuilder()
+//                .addPath(new BezierLine(new Point(pickup2Pose), new Point(scorePose)))
+//                .setLinearHeadingInterpolation(pickup2Pose.getHeading(), scorePose.getHeading())
+//                .build();
+//
+//        /* This is our grabPickup3 PathChain. We are using a single path with a BezierLine, which is a straight line. */
+//        grabPickup3 = follower.pathBuilder()
+//                .addPath(new BezierLine(new Point(scorePose), new Point(pickup3Pose)))
+//                .setLinearHeadingInterpolation(scorePose.getHeading(), pickup3Pose.getHeading())
+//                .build();
+//
+//        /* This is our scorePickup3 PathChain. We are using a single path with a BezierLine, which is a straight line. */
+//        scorePickup3 = follower.pathBuilder()
+//                .addPath(new BezierLine(new Point(pickup3Pose), new Point(scorePose)))
+//                .setLinearHeadingInterpolation(pickup3Pose.getHeading(), scorePose.getHeading())
+//                .build();
+//
+//        /* This is our park path. We are using a BezierCurve with 3 points, which is a curved line that is curved based off of the control point */
+//        park = new Path(new BezierCurve(new Point(scorePose), /* Control Point */ new Point(parkControlPose), new Point(parkPose)));
+//        park.setLinearHeadingInterpolation(scorePose.getHeading(), parkPose.getHeading());
     }
 
     /** This switch is called continuously and runs the pathing, at certain points, it triggers the action state.
@@ -144,7 +175,7 @@ public class SampleAuto extends OpMode {
     public void autonomousPathUpdate() {
         switch (pathState) {
             case 0:
-                follower.followPath(scorePreload);
+                follower.followPath(blueAscentAuto);
                 setPathState(1);
                 break;
             case 1:
@@ -160,7 +191,7 @@ public class SampleAuto extends OpMode {
                     /* Score Preload */
 
                     /* Since this is a pathChain, we can have Pedro hold the end point while we are grabbing the sample */
-                    follower.followPath(grabPickup1,true);
+                    follower.followPath(grabSampleOne,true);
                     setPathState(2);
                 }
                 break;
@@ -170,7 +201,7 @@ public class SampleAuto extends OpMode {
                     /* Grab Sample */
 
                     /* Since this is a pathChain, we can have Pedro hold the end point while we are scoring the sample */
-                    follower.followPath(scorePickup1,true);
+                    follower.followPath(scoreSampleOne,true);
                     setPathState(3);
                 }
                 break;
@@ -180,7 +211,7 @@ public class SampleAuto extends OpMode {
                     /* Score Sample */
 
                     /* Since this is a pathChain, we can have Pedro hold the end point while we are grabbing the sample */
-                    follower.followPath(grabPickup2,true);
+                    follower.followPath(grabSampleTwo,true);
                     setPathState(4);
                 }
                 break;
@@ -190,7 +221,7 @@ public class SampleAuto extends OpMode {
                     /* Grab Sample */
 
                     /* Since this is a pathChain, we can have Pedro hold the end point while we are scoring the sample */
-                    follower.followPath(scorePickup2,true);
+                    follower.followPath(scoreSampleTwo,true);
                     setPathState(5);
                 }
                 break;
@@ -200,7 +231,7 @@ public class SampleAuto extends OpMode {
                     /* Score Sample */
 
                     /* Since this is a pathChain, we can have Pedro hold the end point while we are grabbing the sample */
-                    follower.followPath(grabPickup3,true);
+                    follower.followPath(grabSampleThree,true);
                     setPathState(6);
                 }
                 break;
@@ -210,7 +241,7 @@ public class SampleAuto extends OpMode {
                     /* Grab Sample */
 
                     /* Since this is a pathChain, we can have Pedro hold the end point while we are scoring the sample */
-                    follower.followPath(scorePickup3, true);
+                    follower.followPath(scoreSampleThree, true);
                     setPathState(7);
                 }
                 break;
@@ -220,7 +251,7 @@ public class SampleAuto extends OpMode {
                     /* Score Sample */
 
                     /* Since this is a pathChain, we can have Pedro hold the end point while we are parked */
-                    follower.followPath(park,true);
+                    follower.followPath(blueAscentPark,true);
                     setPathState(8);
                 }
                 break;
