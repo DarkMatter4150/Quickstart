@@ -17,7 +17,7 @@ public class Robot {
     boolean start = false;
     boolean prevStart = false;
 
-    public Robot(org.firstinspires.ftc.teamcode.Aperture aperture, org.firstinspires.ftc.teamcode.HorizontalSlides horizontalSlides, VerticalSlides verticalSlides){
+    public Robot(Aperture aperture, HorizontalSlides horizontalSlides, VerticalSlides verticalSlides){
         this.aperture = aperture;
         this.horizontalSlides = horizontalSlides;
         this.verticalSlides = verticalSlides;

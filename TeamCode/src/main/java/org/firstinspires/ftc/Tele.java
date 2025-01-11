@@ -13,22 +13,22 @@ import com.qualcomm.robotcore.hardware.Servo;
 @TeleOp(group="teleop")
 public class Tele extends OpMode {
 
-    private org.firstinspires.ftc.teamcode.Drivebase drivebase;
-    private org.firstinspires.ftc.teamcode.Ascent ascent;
-    private org.firstinspires.ftc.teamcode.Aperture aperture;
-    private org.firstinspires.ftc.teamcode.HorizontalSlides horizontalSlides;
-    private org.firstinspires.ftc.teamcode.VerticalSlides verticalSlides;
-    private org.firstinspires.ftc.teamcode.Robot robot;
+    private Drivebase drivebase;
+    private Ascent ascent;
+    private Aperture aperture;
+    private HorizontalSlides horizontalSlides;
+    private VerticalSlides verticalSlides;
+    private Robot robot;
     private Gamepad prevManipulator;
     private Gamepad manipulator;
 
     @Override
     public void init() {
-        drivebase = new org.firstinspires.ftc.teamcode.Drivebase(hardwareMap.dcMotor.get("fl"), hardwareMap.dcMotor.get("fr"), hardwareMap.dcMotor.get("bl"), hardwareMap.dcMotor.get("br"), gamepad1);
+        drivebase = new Drivebase(hardwareMap.dcMotor.get("fl"), hardwareMap.dcMotor.get("fr"), hardwareMap.dcMotor.get("bl"), hardwareMap.dcMotor.get("br"), gamepad1);
         //intake = new Intake(hardwareMap.dcMotor.get("intake"), gamepad1, hardwareMap.get(NormalizedColorSensor.class, "color"), hardwareMap.get(Servo.class, "rotater"));
-        ascent = new org.firstinspires.ftc.teamcode.Ascent(hardwareMap.dcMotor.get("ascent"), gamepad1);
+        ascent = new Ascent(hardwareMap.dcMotor.get("ascent"), gamepad1);
         //aperture = new Aperture(hardwareMap.get(CRServo.class, "leftWheel"), hardwareMap.get(CRServo.class, "rightWheel"), hardwareMap.get(Servo.class, "retainer"), hardwareMap.get(Servo.class, "flipper"), hardwareMap.get(Servo.class, "retracter"), gamepad2);
-        aperture = new org.firstinspires.ftc.teamcode.Aperture(hardwareMap.get(CRServo.class, "leftWheel"), hardwareMap.get(CRServo.class, "rightWheel"), hardwareMap.get(Servo.class, "flipper"), gamepad1);
+        aperture = new Aperture(hardwareMap.get(CRServo.class, "leftWheel"), hardwareMap.get(CRServo.class, "rightWheel"), hardwareMap.get(Servo.class, "flipper"), gamepad1);
         //horizontalSlides = new HorizontalSlides(hardwareMap.dcMotor.get("extender"), gamepad2);
         //verticalSlides = new VerticalSlides(hardwareMap.dcMotor.get("lifter1"),hardwareMap.dcMotor.get("lifter2"), gamepad2);
         //robot = new Robot(aperture, horizontalSlides,verticalSlides);
